@@ -1,9 +1,6 @@
 package com.ganesh.Spring5WebApp.domain;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Set;
 
 @Entity
@@ -14,6 +11,11 @@ public class Book {
     private Long id;
     private String title;
     private String isbn;
+
+    // author_book stores the relation ship between Author and Book table records
+    @ManyToMany
+    @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
+               inverseJoinColumns = @JoinColumn(name = "author_id"))
     private Set<Author> authors;
 
     public Book() {
